@@ -5,23 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro timer</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
 </head>
 
 <body>
     <header>Pomodoro Timer</header>
     <section>
         <div id="selectTime">
-            <button class="selectTimeButton" id="pomodoroButton">Pomodoro</button>
-            <button class="selectTimeButton" id="shortBreakButton">Short Break</button>
-            <button class="selectTimeButton" id="LongBreakButton">Long Break</button>
+            <button id="pomodoro">Pomodoro</button>
+            <button id="shortBreak">Short Break</button>
+            <button id="longBreak">Long Break</button>
         </div>
         <div id="timer">
-            <span id="timerClock">00:00</span>
+            <span id="minutes"></span> :
+            <span id="seconds"></span>
         </div>
         <div id="timeControl">
-            <button class="timeControlButton" id="startButton">Start</button>
-            <button class="timeControlButton" id="stopButton">Stop</button>
-            <button class="timeControlButton" id="resetButton">Reset</button>
+            <button id="startButton">Start</button>
+            <button id="stopButton">Stop</button>
+            <button id="resetButton">Reset</button>
         </div>
     </section>
 </body>
