@@ -37,7 +37,7 @@ function setTimer() {
             timer.minutes = 5;
             break;
         case 'longBreak':
-            timer.minutes = 1;
+            timer.minutes = 10;
             break;
     }
     timer.seconds = 0;
