@@ -12,6 +12,8 @@ const seconds = document.getElementById('seconds');
 const start = document.getElementById('startButton');
 const stop = document.getElementById('stopButton');
 const reset = document.getElementById('resetButton');
+const alarmAudio = document.createElement('audio');
+alarmAudio.src = 'alarm-clock.mp3'
 
 selectTime.addEventListener('click', selectClock);
 start.addEventListener('click', startClock);
@@ -35,7 +37,7 @@ function setTimer() {
             timer.minutes = 5;
             break;
         case 'longBreak':
-            timer.minutes = 10;
+            timer.minutes = 1;
             break;
     }
     timer.seconds = 0;
@@ -57,15 +59,15 @@ function selectClock() {
 
 function startClock() {
     timer.total = timer.minutes * 60 + timer.seconds;
-    console.log(timer.total);
     function updateCounter() {
         timer.seconds = Math.floor((timer.total) % 60);
         timer.minutes = Math.floor((timer.total / 60) % 60);
 
         showTimer();
         timer.total -= 1;
-        if (timer.total <= 0) {
+        if (timer.total < 0) {
             clearInterval(timeInterval);
+            alarmAudio.play();
         }
     }
     updateCounter();
