@@ -4,7 +4,7 @@ let timer = {
     seconds: 0
 };
 let timeInterval;
-let timeClass;
+let timeClass = 'pomodoro';
 
 const selectTime = document.getElementById('selectTime')
 const minutes = document.getElementById('minutes');
@@ -13,9 +13,10 @@ const start = document.getElementById('startButton');
 const stop = document.getElementById('stopButton');
 const reset = document.getElementById('resetButton');
 
-selectTime.addEventListener('click', setTimer);
+selectTime.addEventListener('click', selectClock);
 start.addEventListener('click', startClock);
 stop.addEventListener('click', stopClock);
+reset.addEventListener('click', setTimer);
 
 showTimer();
 
@@ -25,14 +26,8 @@ function showTimer() {
 }
 
 function setTimer() {
-    const target = event.target;
-
-    // recorrer tot els fills i esborrar la classe.
-    //target.classList.toggle('isActive');
-
-    target.classList = 'isActive';
-
-    switch (target.id) {
+    stopClock();
+    switch (timeClass) {
         case 'pomodoro':
             timer.minutes = 20;
             break;
@@ -43,21 +38,31 @@ function setTimer() {
             timer.minutes = 10;
             break;
     }
-
+    timer.seconds = 0;
     showTimer();
-    //console.log(timer);
+}
+function selectClock() {
+    const target = event.target;
+    const children = event.currentTarget.children;
+
+    for (let i = 0; i < children.length; i++) {
+        children[i].classList = '';
+    }
+
+    target.classList = 'isActive';
+    timeClass = target.id;
+
+    setTimer();
 }
 
 function startClock() {
     timer.total = timer.minutes * 60 + timer.seconds;
     console.log(timer.total);
     function updateCounter() {
-        //const t = timeRemainig(endTime);
         timer.seconds = Math.floor((timer.total) % 60);
         timer.minutes = Math.floor((timer.total / 60) % 60);
 
         showTimer();
-        //console.log(timer);
         timer.total -= 1;
         if (timer.total <= 0) {
             clearInterval(timeInterval);
@@ -67,15 +72,6 @@ function startClock() {
     timeInterval = setInterval(updateCounter, 1000);
 }
 
-
-
-
 function stopClock() {
     clearInterval(timeInterval);
-}
-
-function resetClock() {
-    // detectar quin element isActive i segons el id assignar el temps i mostrar
-
-
 }
